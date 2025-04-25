@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($stmt->execute()) {
                 echo json_encode(["message" => "Registration successful"]);
             } else {
-                echo json_encode(["message" => "Registration failed: " . $stmt->error]);
+                echo json_encode(["message" => "Registration failed(php): " . $stmt->error]);
             }
         }
         $stmt->close();
