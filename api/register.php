@@ -17,8 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['username'], $_POST['email'], $_POST['password_hash'], $_POST['userType'])) {
         $username = trim($_POST['username']);
         $email = trim($_POST['email']);
-        $password_hash = password_hash($_POST['password_hash'], PASSWORD_BCRYPT); // 將密碼進行哈希處理
-        $userType = trim($_POST['userType']); // 獲取用戶類型
+        $password_hash = password_hash($_POST['password_hash'], PASSWORD_BCRYPT);
+        $userType = trim($_POST['userType']);
 
         // 驗證電子郵件格式
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -37,12 +37,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             // 將用戶名、電子郵件、密碼和用戶類型存儲到資料庫中
             $stmt = $conn->prepare("INSERT INTO users (username, email, password_hash, userType) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("ssss", $username, $email, $password_hash, $userType); // 包含 userType
+            $stmt->bind_param("ssss", $username, $email, $password_hash, $userType);
 
             if ($stmt->execute()) {
                 echo json_encode(["message" => "Registration successful"]);
             } else {
-                echo json_encode(["message" => "Registration failed: " . $stmt->error]);
+                echo json_encode(["message" => "Registration failed: " . $stmt->error]); // 顯示具體錯誤
             }
         }
         $stmt->close();
