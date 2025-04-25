@@ -4,7 +4,7 @@ header("Content-Type: application/json; charset=UTF-8");
 session_start();
 
 // 連接到資料庫
-$conn = new mysqli("14.136.78.203", "Ealogin", "Abc3691591@3", "fyp");
+$conn = new mysqli("14.136.78.203", "Ealogin", "Abc3691591@3", "your_database_name");
 
 // 檢查資料庫連接
 if ($conn->connect_error) {
